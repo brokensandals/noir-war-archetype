@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <packaging>war</packaging>
+
+  <name>${artifactId}</name>
+  <url>FIXME</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>noir</groupId>
+      <artifactId>noir</artifactId>
+      <version>1.3.0-beta7</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clojure</groupId>
+      <artifactId>clojure</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.3.10</version>
+        <extensions>true</extensions>
+        <executions>
+          <execution>
+            <id>compile-clojure</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <systemProperty>
+              <name>noir.mode</name>
+              <value>dev</value>
+            </systemProperty>
+          </systemProperties>
+          <webAppConfig>
+            <!-- this lets Ring's auto-reloading work -->
+            <extraClasspath>${basedir}/src/main/clojure</extraClasspath>
+          </webAppConfig>
+          <webAppProperties>
+            <extraClasspath>src/main/clojure</extraClasspath>
+          </webAppProperties>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>clojars</id>
+      <url>http://clojars.org</url>
+    </repository>
+  </repositories>
+</project>
