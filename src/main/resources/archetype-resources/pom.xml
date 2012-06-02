@@ -12,9 +12,27 @@
 
   <dependencies>
     <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <groupId>noir</groupId>
       <artifactId>noir</artifactId>
       <version>1.3.0-beta7</version>
+      <exclusions>
+        <exclusion>
+          <groupId>ring</groupId>
+          <artifactId>ring-jetty-adapter</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>noir-servlet</groupId>
+      <artifactId>noir-servlet</artifactId>
+      <version>0.1.0</version>
     </dependency>
     <dependency>
       <groupId>org.clojure</groupId>
@@ -38,6 +56,13 @@
               <goal>compile</goal>
             </goals>
           </execution>
+          <execution>
+            <id>test-clojure</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
       <plugin>
@@ -51,6 +76,9 @@
             </systemProperty>
           </systemProperties>
           <webAppConfig>
+            <!-- running with a context root during development helps avoid bugs due to
+                 forgetting to include the context root in a generated URL -->
+            <contextPath>/${artifactId}</contextPath>
             <!-- this lets Ring's auto-reloading work -->
             <extraClasspath>${basedir}/src/main/clojure</extraClasspath>
           </webAppConfig>
@@ -65,7 +93,7 @@
   <repositories>
     <repository>
       <id>clojars</id>
-      <url>http://clojars.org</url>
+      <url>http://clojars.org/repo</url>
     </repository>
   </repositories>
 </project>

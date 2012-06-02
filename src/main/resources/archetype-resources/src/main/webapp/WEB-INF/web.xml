@@ -7,7 +7,11 @@
 
   <servlet>
     <servlet-name>noir</servlet-name>
-    <servlet-class>${package}.servlet</servlet-class>
+    <servlet-class>noir_servlet.servlet</servlet-class>
+    <init-param>
+      <param-name>views-ns</param-name>
+      <param-value>${package}.views</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>noir</servlet-name>

@@ -5,8 +5,17 @@
     <fileSet filtered="true" packaged="true">
       <directory>src/main/clojure</directory>
     </fileSet>
+    <fileSet filtered="true" packaged="true">
+      <directory>src/test/clojure</directory>
+    </fileSet>
     <fileSet filtered="true" packaged="false">
       <directory>src/main/webapp</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory></directory>
+      <includes>
+        <include>README.md</include>
+      </includes>
     </fileSet>
   </fileSets>
 </archetype-descriptor>
